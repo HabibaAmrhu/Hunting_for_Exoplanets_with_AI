@@ -1,0 +1,10 @@
+# Notebooks Directory
+
+This directory contains Jupyter notebooks for the exoplanet detection pipeline:
+
+- 00_data_prep_kepler.ipynb - Kepler data download and preprocessing
+- 01_train_baseline.ipynb - Baseline 1D CNN training
+- 02_augmentation_and_cv.ipynb - Augmentation experiments and cross-validation
+- 03_train_ensemble.ipynb - Advanced models and ensemble training
+- 04_evaluate_and_explain.ipynb - Model evaluation and explanations
+- 05_deploy_streamlit.ipynb - Streamlit demo deployment

@@ -1,0 +1,205 @@
+# 🚀 Exoplanet Detection System - Git Ignore File
+# Optimized for competition submission and professional development
+
+# ============================================================================
+# PYTHON & ENVIRONMENT
+# ============================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ============================================================================
+# DATA & MODELS (IMPORTANT FOR SPACE/PERFORMANCE)
+# ============================================================================
+# Large datasets (keep repository lightweight)
+data/raw/
+data/processed/
+data/external/
+*.fits
+*.h5
+*.hdf5
+*.npz
+*.pkl
+*.pickle
+
+# Trained model files (too large for Git)
+models/trained/
+*.pth
+*.pt
+*.ckpt
+*.model
+*.weights
+*.h5
+
+# Model outputs and predictions
+outputs/
+predictions/
+results/model_*
+checkpoints/
+
+# ============================================================================
+# DEVELOPMENT & TEMPORARY FILES
+# ============================================================================
+# Habiba folder (development artifacts)
+Habiba/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.out
+
+# ============================================================================
+# SYSTEM & OS FILES
+# ============================================================================
+# Windows
+*.exe
+*.msi
+*.msm
+*.msp
+desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ============================================================================
+# SECURITY & CREDENTIALS
+# ============================================================================
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+secrets/
+*.key
+*.pem
+*.crt
+config/secrets.yaml
+
+# API keys and tokens
+api_keys.txt
+tokens.json
+credentials.json
+
+# ============================================================================
+# DOCKER & DEPLOYMENT
+# ============================================================================
+# Docker volumes and data
+docker-data/
+volumes/
+
+# Kubernetes secrets (if any)
+k8s-secrets/
+
+# ============================================================================
+# LOGS & MONITORING
+# ============================================================================
+# Application logs
+logs/
+*.log
+log_*
+
+# Monitoring data
+monitoring/data/
+prometheus/data/
+
+# ============================================================================
+# CACHE & TEMPORARY PROCESSING
+# ============================================================================
+# Processing cache
+cache/
+.cache/
+tmp/
+temp/
+
+# Streamlit cache
+.streamlit/
+
+# ============================================================================
+# WHAT TO KEEP (EXPLICITLY INCLUDE IMPORTANT FILES)
+# ============================================================================
+# Keep these important files even if they match patterns above
+!requirements.txt
+!streamlit_app/requirements.txt
+!deployment/docker/requirements.txt
+!.gitkeep
+!README.md
+!LICENSE
+!CONTRIBUTING.md
+!docs/
+!examples/

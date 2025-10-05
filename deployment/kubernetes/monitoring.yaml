@@ -1,0 +1,182 @@
+apiVersion: v1
+kind: ServiceMonitor
+metadata:
+  name: exoplanet-metrics
+  namespace: exoplanet-detection
+  labels:
+    app: exoplanet-api
+spec:
+  selector:
+    matchLabels:
+      app: exoplanet-api
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 30s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: exoplanet-alerts
+  namespace: exoplanet-detection
+spec:
+  groups:
+  - name: exoplanet.rules
+    rules:
+    - alert: ExoplanetAPIDown
+      expr: up{job="exoplanet-api"} == 0
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Exoplanet API is down"
+        description: "The exoplanet detection API has been down for more than 1 minute."
+    
+    - alert: HighErrorRate
+      expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High error rate detected"
+        description: "Error rate is {{ $value }} errors per second."
+    
+    - alert: HighLatency
+      expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 1
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High latency detected"
+        description: "95th percentile latency is {{ $value }} seconds."
+    
+    - alert: LowAccuracy
+      expr: model_accuracy < 0.85
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Model accuracy below threshold"
+        description: "Model accuracy is {{ $value }}, below the 0.85 threshold."
+    
+    - alert: DataDriftDetected
+      expr: data_drift_score > 0.3
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Data drift detected"
+        description: "Data drift score is {{ $value }}, indicating potential model degradation."
+    
+    - alert: HighMemoryUsage
+      expr: container_memory_usage_bytes{pod=~"exoplanet-.*"} / container_spec_memory_limit_bytes > 0.9
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High memory usage"
+        description: "Memory usage is {{ $value | humanizePercentage }} of limit."
+    
+    - alert: DatabaseConnectionFailure
+      expr: postgresql_up == 0
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Database connection failure"
+        description: "Cannot connect to PostgreSQL database."
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard
+  namespace: exoplanet-detection
+data:
+  exoplanet-dashboard.json: |
+    {
+      "dashboard": {
+        "id": null,
+        "title": "Exoplanet Detection Pipeline",
+        "tags": ["exoplanet", "ml", "astronomy"],
+        "timezone": "browser",
+        "panels": [
+          {
+            "id": 1,
+            "title": "API Requests",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(http_requests_total[5m])",
+                "legendFormat": "{{method}} {{status}}"
+              }
+            ],
+            "yAxes": [
+              {
+                "label": "Requests/sec"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "title": "Model Accuracy",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "model_accuracy",
+                "legendFormat": "Accuracy"
+              }
+            ],
+            "fieldConfig": {
+              "defaults": {
+                "min": 0,
+                "max": 1,
+                "thresholds": {
+                  "steps": [
+                    {"color": "red", "value": 0},
+                    {"color": "yellow", "value": 0.8},
+                    {"color": "green", "value": 0.9}
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": 3,
+            "title": "Response Time",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+                "legendFormat": "95th percentile"
+              },
+              {
+                "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket[5m]))",
+                "legendFormat": "50th percentile"
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "title": "Data Drift Score",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "data_drift_score",
+                "legendFormat": "Drift Score"
+              }
+            ],
+            "yAxes": [
+              {
+                "min": 0,
+                "max": 1
+              }
+            ]
+          }
+        ],
+        "time": {
+          "from": "now-1h",
+          "to": "now"
+        },
+        "refresh": "30s"
+      }
+    }

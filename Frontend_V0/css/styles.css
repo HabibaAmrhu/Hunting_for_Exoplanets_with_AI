@@ -1,0 +1,2886 @@
+/* NASA Exoplanet Detection Pipeline - Main Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--secondary-bg);
+    border-right: 1px solid var(--border-light);
+    padding: var(--spacing-xl);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--accent-primary);
+}
+
+.sidebar-header h2 {
+    font-size: 1.5rem;
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-xs);
+}
+
+.sidebar-header p {
+    font-size: 0.875rem;
+    color: var(--secondary-text);
+}
+
+.nav-menu {
+    list-style: none;
+}
+
+.nav-link {
+    display: block;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-text);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background-color: var(--tertiary-bg);
+    transform: translateX(5px);
+}
+
+.nav-link.active {
+    background: var(--accent-gradient);
+    color: white;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 280px;
+    padding: var(--spacing-2xl);
+    min-height: 100vh;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Page Header */
+.page-header {
+    margin-bottom: var(--spacing-2xl);
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--secondary-text);
+}
+
+/* Stats Container */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.stat-card {
+    background: var(--secondary-bg);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    border: 1px solid var(--border-light);
+    transition: all var(--transition-normal);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-card h3 {
+    font-size: 2.5rem;
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.stat-card p {
+    color: var(--secondary-text);
+    font-size: 1rem;
+}
+
+/* Feature Cards */
+.feature-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.feature-card {
+    background: var(--primary-bg);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.feature-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-10px);
+}
+
+.card-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.feature-card h2 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.feature-card p {
+    color: var(--secondary-text);
+    margin-bottom: var(--spacing-lg);
+}
+
+.feature-list {
+    list-style: none;
+    margin-bottom: var(--spacing-xl);
+}
+
+.feature-list li {
+    padding: var(--spacing-sm) 0;
+    color: var(--primary-text);
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    width: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background: var(--secondary-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-medium);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+    background: var(--tertiary-bg);
+    border-color: var(--accent-primary);
+}
+
+.btn-choice {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    font-size: 1.125rem;
+    margin: var(--spacing-sm);
+}
+
+.btn-planet {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+.btn-no-planet {
+    background: var(--secondary-bg);
+    color: var(--primary-text);
+    border: 2px solid var(--border-medium);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+    border-bottom: 2px solid var(--border-light);
+    overflow-x: auto;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 1rem;
+    color: var(--secondary-text);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    color: var(--accent-primary);
+}
+
+.tab-btn.active {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Game Container */
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.score-dashboard {
+    display: flex;
+    justify-content: space-around;
+    background: var(--secondary-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.score-item {
+    text-align: center;
+}
+
+.score-item .label {
+    display: block;
+    color: var(--secondary-text);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.score-item .value {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-primary);
+}
+
+/* Plot Container */
+.plot-container {
+    background: var(--primary-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    min-height: 400px;
+}
+
+/* Question Container */
+.question-container {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.question-container h3 {
+    font-size: 1.5rem;
+    color: var(--primary-text);
+    margin-bottom: var(--spacing-lg);
+}
+
+.button-group {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.button-group-secondary {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+}
+
+/* Feedback Container */
+.feedback-container {
+    background: var(--secondary-bg);
+    border-left: 4px solid var(--accent-primary);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.feedback-container.correct {
+    border-left-color: var(--success);
+    background: #d1fae5;
+}
+
+.feedback-container.incorrect {
+    border-left-color: var(--error);
+    background: #fee2e2;
+}
+
+.feedback-container.hidden {
+    display: none;
+}
+
+/* Explanation Container */
+.explanation-container {
+    background: var(--primary-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.explanation-container.hidden {
+    display: none;
+}
+
+/* AI Analysis Container */
+.ai-container {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.ai-container.hidden {
+    display: none;
+}
+
+/* Learn Container */
+.learn-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.topic-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.topic-btn {
+    background: var(--secondary-bg);
+    border: 2px solid var(--border-light);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: 1rem;
+    color: var(--primary-text);
+}
+
+.topic-btn:hover {
+    border-color: var(--accent-primary);
+    background: var(--tertiary-bg);
+}
+
+.topic-btn.active {
+    background: var(--accent-gradient);
+    color: white;
+    border-color: transparent;
+}
+
+.topic-content {
+    background: var(--primary-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+    min-height: 400px;
+}
+
+/* Gallery */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.example-card {
+    background: var(--secondary-bg);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-align: center;
+}
+
+.example-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.example-card h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.example-card p {
+    color: var(--secondary-text);
+}
+
+.example-detail {
+    background: var(--primary-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+}
+
+.example-detail.hidden {
+    display: none;
+}
+
+/* Challenge */
+.difficulty-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.difficulty-card {
+    background: var(--secondary-bg);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-align: center;
+}
+
+.difficulty-card:hover {
+    border-color: var(--accent-primary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-xl);
+}
+
+.difficulty-card h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.difficulty-desc {
+    color: var(--secondary-text);
+    font-size: 0.875rem;
+}
+
+/* Research Mode */
+.input-method-selector {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+}
+
+.method-btn {
+    flex: 1;
+    background: var(--secondary-bg);
+    border: 2px solid var(--border-light);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.method-btn:hover {
+    border-color: var(--accent-primary);
+}
+
+.method-btn.active {
+    background: var(--accent-gradient);
+    color: white;
+    border-color: transparent;
+}
+
+.input-method {
+    display: none;
+}
+
+.input-method.active {
+    display: block;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed var(--border-medium);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+    text-align: center;
+    transition: all var(--transition-normal);
+    background: var(--secondary-bg);
+}
+
+.upload-area:hover {
+    border-color: var(--accent-primary);
+    background: var(--tertiary-bg);
+}
+
+#file-input {
+    display: none;
+}
+
+.upload-label {
+    cursor: pointer;
+    display: block;
+}
+
+.upload-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: var(--spacing-md);
+}
+
+.upload-hint {
+    display: block;
+    color: var(--secondary-text);
+    font-size: 0.875rem;
+    margin-top: var(--spacing-sm);
+}
+
+/* Results */
+.results-container {
+    background: var(--primary-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.results-container.hidden {
+    display: none;
+}
+
+/* About Page */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-section {
+    background: var(--secondary-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.about-section h2 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.about-section ul {
+    list-style-position: inside;
+    color: var(--primary-text);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: var(--spacing-md);
+    }
+    
+    .feature-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .tabs {
+        flex-wrap: wrap;
+    }
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: var(--spacing-sm); }
+.mt-2 { margin-top: var(--spacing-md); }
+.mt-3 { margin-top: var(--spacing-lg); }
+.mt-4 { margin-top: var(--spacing-xl); }
+
+.mb-1 { margin-bottom: var(--spacing-sm); }
+.mb-2 { margin-bottom: var(--spacing-md); }
+.mb-3 { margin-bottom: var(--spacing-lg); }
+.mb-4 { margin-bottom: var(--spacing-xl); }
+
+.p-1 { padding: var(--spacing-sm); }
+.p-2 { padding: var(--spacing-md); }
+.p-3 { padding: var(--spacing-lg); }
+.p-4 { padding: var(--spacing-xl); }
+
+
+/* Enhanced Visualizations Styles */
+.viz-container {
+    padding: var(--spacing-lg);
+}
+
+.viz-description {
+    color: var(--secondary-text);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.1rem;
+}
+
+.plot-container-large {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    margin: var(--spacing-lg) 0;
+    min-height: 600px;
+}
+
+.metric-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.metric-card-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    color: white;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: transform 0.3s ease;
+}
+
+.metric-card-gradient:hover {
+    transform: translateY(-5px);
+}
+
+.metric-icon {
+    font-size: 2.5em;
+}
+
+.metric-content {
+    flex: 1;
+}
+
+.metric-title {
+    font-size: 0.9em;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.metric-delta {
+    font-size: 0.85em;
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+.controls-panel {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.viz-info {
+    background: var(--secondary-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-lg);
+}
+
+.viz-info h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.viz-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.viz-info li {
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.viz-info li:last-child {
+    border-bottom: none;
+}
+
+.architecture-details {
+    margin-top: var(--spacing-xl);
+}
+
+.architecture-card {
+    background: var(--secondary-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    border-left: 4px solid var(--accent-primary);
+}
+
+.architecture-card h5 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.arch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.arch-grid ul {
+    list-style: none;
+    padding: 0;
+}
+
+.arch-grid li {
+    padding: var(--spacing-xs) 0;
+    color: var(--secondary-text);
+}
+
+.efficiency-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.efficiency-card {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    color: white;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: transform 0.3s ease;
+}
+
+.efficiency-card:hover {
+    transform: translateY(-5px);
+}
+
+.efficiency-card:nth-child(2) {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.efficiency-card:nth-child(3) {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.efficiency-card:nth-child(4) {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.efficiency-icon {
+    font-size: 2.5em;
+}
+
+.efficiency-content h4 {
+    font-size: 0.9em;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.efficiency-model {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.efficiency-value {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .metric-cards-grid,
+    .efficiency-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .arch-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .controls-panel {
+        flex-direction: column;
+    }
+    
+    .controls-panel button {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   Model Comparison Enhancements
+   ======================================== */
+
+.model-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+}
+
+.model-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.model-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.model-card input[type="checkbox"] {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent-primary);
+    cursor: pointer;
+}
+
+.model-card-content {
+    padding-top: var(--spacing-sm);
+}
+
+.model-card-content h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.1em;
+}
+
+.model-card-content p {
+    color: var(--secondary-text);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.9em;
+}
+
+.model-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85em;
+    color: var(--primary-text);
+    font-weight: 500;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-light);
+}
+
+.comparison-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+    flex-wrap: wrap;
+}
+
+.section-description {
+    color: var(--secondary-text);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.05em;
+}
+
+/* Comparison Results Styling */
+.comparison-results {
+    margin-top: var(--spacing-xl);
+}
+
+.comparison-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, var(--nasa-blue) 0%, var(--accent-primary) 100%);
+    color: white;
+    border-radius: var(--radius-md);
+}
+
+.comparison-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.comparison-header p {
+    margin: var(--spacing-xs) 0 0 0;
+    opacity: 0.9;
+}
+
+.export-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.comparison-table-container {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+    box-shadow: var(--shadow-md);
+    overflow-x: auto;
+}
+
+.detailed-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-md);
+}
+
+.detailed-comparison-table th,
+.detailed-comparison-table td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.detailed-comparison-table th {
+    background: var(--secondary-bg);
+    font-weight: 600;
+    color: var(--nasa-blue);
+    position: sticky;
+    top: 0;
+}
+
+.detailed-comparison-table tr:hover {
+    background: var(--secondary-bg);
+}
+
+.metric-cell {
+    font-weight: 500;
+    color: var(--primary-text);
+}
+
+.comparison-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.plot-container-medium {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    min-height: 400px;
+}
+
+.architecture-comparison-section {
+    margin: var(--spacing-xl) 0;
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.architecture-comparison-section h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .model-selection-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .comparison-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+    
+    .export-buttons,
+    .comparison-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .export-buttons button,
+    .comparison-actions button {
+        width: 100%;
+    }
+    
+    .comparison-charts {
+        grid-template-columns: 1fr;
+    }
+    
+    .model-stats {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+}
+
+/* Loading States */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* ========================================
+   Detailed Analysis Section
+   ======================================== */
+
+.detailed-analysis-section {
+    margin-top: var(--spacing-xl);
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--accent-primary);
+}
+
+.detailed-analysis-content h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.5em;
+}
+
+.analysis-section {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-lg);
+    background: var(--secondary-bg);
+    border-radius: var(--radius-sm);
+}
+
+.analysis-section h4 {
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.2em;
+}
+
+.analysis-section p {
+    color: var(--primary-text);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+}
+
+.analysis-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.analysis-section ul li {
+    padding: var(--spacing-sm) 0;
+    color: var(--primary-text);
+    line-height: 1.6;
+}
+
+.analysis-section ul li::before {
+    content: "✓ ";
+    color: var(--success-color, #2ecc71);
+    font-weight: bold;
+    margin-right: var(--spacing-sm);
+}
+
+.performance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.performance-table th,
+.performance-table td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.performance-table th {
+    background: var(--nasa-blue);
+    color: white;
+    font-weight: 600;
+}
+
+.performance-table tr:hover {
+    background: var(--secondary-bg);
+}
+
+.analysis-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    justify-content: flex-end;
+}
+
+/* Export Success Animation */
+@keyframes downloadPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.btn-primary:active {
+    animation: downloadPulse 0.3s ease;
+}
+
+/* ========================================
+   Performance Dashboard Styles
+   ======================================== */
+
+.performance-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.performance-header h3 {
+    color: var(--nasa-blue);
+    font-size: 2em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.performance-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+}
+
+.performance-charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+}
+
+.chart-container {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    min-height: 350px;
+}
+
+.performance-table-section {
+    margin: var(--spacing-xl) 0;
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.performance-table-section h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+.performance-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.performance-comparison-table th,
+.performance-comparison-table td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.performance-comparison-table th {
+    background: var(--secondary-bg);
+    font-weight: 600;
+    color: var(--nasa-blue);
+}
+
+.performance-comparison-table tr:hover {
+    background: var(--secondary-bg);
+}
+
+.performance-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-top: var(--spacing-xl);
+}
+
+/* ========================================
+   Challenge Mode Styles
+   ======================================== */
+
+.challenge-active {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.challenge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--border-light);
+}
+
+.challenge-info h2 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-xs);
+}
+
+.challenge-info p {
+    color: var(--secondary-text);
+}
+
+.challenge-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    color: var(--secondary-text);
+    font-size: 0.9em;
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-value {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--accent-primary);
+}
+
+.challenge-question {
+    margin: var(--spacing-xl) 0;
+    text-align: center;
+}
+
+.challenge-question h3 {
+    color: var(--primary-text);
+    margin-bottom: var(--spacing-lg);
+}
+
+.challenge-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+}
+
+.challenge-feedback {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.feedback-message {
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+}
+
+.feedback-message.correct {
+    background: #d4edda;
+    border: 2px solid #28a745;
+    color: #155724;
+}
+
+.feedback-message.incorrect {
+    background: #f8d7da;
+    border: 2px solid #dc3545;
+    color: #721c24;
+}
+
+.feedback-message.timeout {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    color: #856404;
+}
+
+.challenge-progress {
+    margin-top: var(--spacing-xl);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: var(--border-light);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--nasa-blue));
+    transition: width 0.3s ease;
+}
+
+.challenge-results {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.challenge-results h2 {
+    color: var(--nasa-blue);
+    font-size: 2.5em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.challenge-results h3 {
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-xl);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+}
+
+.result-card {
+    background: var(--secondary-bg);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.result-icon {
+    font-size: 3em;
+    margin-bottom: var(--spacing-md);
+}
+
+.result-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.result-label {
+    color: var(--secondary-text);
+    font-size: 1.1em;
+}
+
+.performance-message {
+    margin: var(--spacing-xl) 0;
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--accent-primary);
+}
+
+.performance-message h4 {
+    color: var(--nasa-blue);
+    font-size: 1.5em;
+}
+
+.challenge-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-top: var(--spacing-xl);
+    flex-wrap: wrap;
+}
+
+/* Responsive Design for Challenge Mode */
+@media (max-width: 768px) {
+    .challenge-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+    
+    .challenge-buttons {
+        flex-direction: column;
+    }
+    
+    .challenge-buttons button {
+        width: 100%;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .challenge-actions {
+        flex-direction: column;
+    }
+    
+    .challenge-actions button {
+        width: 100%;
+    }
+    
+    .performance-charts-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   Enhanced Hint System Styles
+   ======================================== */
+
+.hint-panel {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--accent-primary);
+    margin-top: var(--spacing-lg);
+}
+
+.hint-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--border-light);
+}
+
+.hint-header h3 {
+    color: var(--nasa-blue);
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: var(--secondary-text);
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: var(--secondary-bg);
+    color: var(--accent-primary);
+}
+
+.hint-main {
+    font-size: 1.2em;
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.hint-details {
+    margin: var(--spacing-lg) 0;
+}
+
+.hint-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.hint-details li {
+    padding: var(--spacing-sm) 0;
+    padding-left: var(--spacing-lg);
+    position: relative;
+}
+
+.hint-details li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-weight: bold;
+}
+
+.hint-tip {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    font-style: italic;
+}
+
+.hint-stats {
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: var(--secondary-bg);
+    border-radius: var(--radius-sm);
+}
+
+.hint-stats h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-sm);
+    background: white;
+    border-radius: var(--radius-sm);
+}
+
+.stat-label {
+    font-weight: 600;
+    color: var(--secondary-text);
+}
+
+.stat-value {
+    font-weight: bold;
+    color: var(--accent-primary);
+}
+
+/* ========================================
+   Interactive Learn the Basics Styles
+   ======================================== */
+
+.interactive-topic {
+    animation: fadeIn 0.5s ease;
+}
+
+.topic-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--border-light);
+}
+
+.topic-header h2 {
+    color: var(--nasa-blue);
+    font-size: 2em;
+}
+
+.lead-text {
+    font-size: 1.3em;
+    color: var(--primary-text);
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+    line-height: 1.6;
+}
+
+.interactive-demo {
+    background: var(--secondary-bg);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+}
+
+.interactive-demo h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+.demo-container {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-lg);
+}
+
+.demo-plot {
+    min-height: 300px;
+    margin-bottom: var(--spacing-md);
+}
+
+.demo-controls {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--spacing-md);
+}
+
+.demo-controls label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--primary-text);
+    font-weight: 500;
+}
+
+.demo-controls input[type="range"] {
+    width: 150px;
+}
+
+.btn-demo {
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-demo:hover {
+    background: var(--nasa-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.topic-section {
+    margin: var(--spacing-xl) 0;
+}
+
+.topic-section h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+.component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.component-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.component-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.component-icon {
+    font-size: 3em;
+    margin-bottom: var(--spacing-md);
+}
+
+.component-card h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.component-card .detail {
+    color: var(--secondary-text);
+    font-size: 0.9em;
+    margin-top: var(--spacing-sm);
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.info-card {
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    border-left: 4px solid;
+}
+
+.info-card.planet {
+    background: #e3f2fd;
+    border-color: #2196f3;
+}
+
+.info-card.star {
+    background: #fff3e0;
+    border-color: #ff9800;
+}
+
+.info-card.binary {
+    background: #f3e5f5;
+    border-color: #9c27b0;
+}
+
+.info-card.pulse {
+    background: #fce4ec;
+    border-color: #e91e63;
+}
+
+.info-card h4 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.fun-fact {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-left: 4px solid var(--accent-primary);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    margin: var(--spacing-xl) 0;
+}
+
+.fun-fact h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.characteristic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.char-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.char-icon {
+    font-size: 2.5em;
+    margin-bottom: var(--spacing-md);
+}
+
+.char-card h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.example {
+    background: var(--secondary-bg);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-sm);
+    font-size: 0.9em;
+    color: var(--secondary-text);
+}
+
+.process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.step {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+    padding: var(--spacing-lg);
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.step-number {
+    background: var(--accent-primary);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-xs);
+}
+
+.signal-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+}
+
+.signal-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.signal-card h3 {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.signal-demo {
+    min-height: 150px;
+    background: var(--secondary-bg);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.signal-features {
+    margin: var(--spacing-md) 0;
+}
+
+.feature {
+    padding: var(--spacing-sm);
+    margin: var(--spacing-xs) 0;
+    border-radius: var(--radius-sm);
+}
+
+.feature.good {
+    background: #d4edda;
+    color: #155724;
+}
+
+.feature.bad {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.feature.warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.quiz-section {
+    background: var(--secondary-bg);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+}
+
+.quiz-section h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+.quiz-question {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-lg);
+}
+
+.quiz-question p {
+    margin-bottom: var(--spacing-md);
+    font-size: 1.1em;
+}
+
+.quiz-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.quiz-option {
+    background: var(--secondary-bg);
+    border: 2px solid var(--border-light);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.quiz-option:hover:not(:disabled) {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.quiz-option.correct {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.quiz-option.incorrect {
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.quiz-option:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.quiz-feedback {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+}
+
+.correct-answer {
+    background: #d4edda;
+    border: 2px solid #28a745;
+    color: #155724;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+}
+
+.incorrect-answer {
+    background: #f8d7da;
+    border: 2px solid #dc3545;
+    color: #721c24;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+}
+
+.challenges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.challenge-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.challenge-icon {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.challenge-card h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.challenge-content ul {
+    margin: var(--spacing-md) 0;
+}
+
+.solution-box {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-left: 4px solid var(--accent-primary);
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    border-radius: var(--radius-sm);
+}
+
+.success-story {
+    background: linear-gradient(135deg, #2ecc7115 0%, #27ae6015 100%);
+    border-left: 4px solid #2ecc71;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    margin: var(--spacing-xl) 0;
+}
+
+.success-story h3 {
+    color: #27ae60;
+    margin-bottom: var(--spacing-md);
+}
+
+.ai-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+}
+
+.benefit-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.benefit-icon {
+    font-size: 3em;
+    margin-bottom: var(--spacing-md);
+}
+
+.benefit-card h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.stat {
+    background: var(--accent-primary);
+    color: white;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-md);
+    font-weight: bold;
+}
+
+.ai-models-section {
+    margin: var(--spacing-xl) 0;
+}
+
+.models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.model-card {
+    background: var(--secondary-bg);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    text-align: center;
+}
+
+.model-card h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.model-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: var(--spacing-md);
+    font-weight: 600;
+    color: var(--accent-primary);
+}
+
+.try-it-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+}
+
+.try-it-section h3 {
+    color: white;
+    margin-bottom: var(--spacing-md);
+}
+
+.try-it-section .btn-primary {
+    background: white;
+    color: var(--accent-primary);
+    margin-top: var(--spacing-md);
+}
+
+.try-it-section .btn-primary:hover {
+    background: var(--secondary-bg);
+}
+
+.topic-btn.active {
+    background: var(--accent-primary);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .component-grid,
+    .characteristic-grid,
+    .signal-comparison,
+    .challenges-grid,
+    .ai-benefits,
+    .models-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .demo-controls {
+        flex-direction: column;
+    }
+    
+    .quiz-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   Educational Light Curve Analyzer Styles
+   ======================================== */
+
+.educational-intro {
+    margin: var(--spacing-xl) 0;
+}
+
+.intro-card {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-left: 4px solid var(--accent-primary);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+}
+
+.intro-card h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.intro-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.intro-card li {
+    padding: var(--spacing-sm) 0;
+    font-size: 1.1em;
+}
+
+.analyzer-container {
+    margin: var(--spacing-xl) 0;
+}
+
+.controls-section {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.controls-section h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.analysis-panel {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    margin: var(--spacing-lg) 0;
+    box-shadow: var(--shadow-md);
+}
+
+.analysis-panel h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.result-card {
+    background: var(--secondary-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.result-card h4 {
+    color: var(--secondary-text);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.9em;
+}
+
+.result-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--accent-primary);
+}
+
+.planet-detected {
+    color: #2ecc71;
+}
+
+.no-planet {
+    color: var(--secondary-text);
+}
+
+.educational-info {
+    margin: var(--spacing-xl) 0;
+}
+
+.info-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.info-tab-btn {
+    background: var(--secondary-bg);
+    border: 2px solid var(--border-light);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.info-tab-btn:hover {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.info-tab-btn.active {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.info-tab-content {
+    display: none;
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+.info-tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.info-tab-content h3 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+.info-section {
+    margin: var(--spacing-lg) 0;
+}
+
+.info-section h4 {
+    color: var(--accent-primary);
+    margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+}
+
+.visual-guide {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.guide-item {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+    padding: var(--spacing-lg);
+    background: var(--secondary-bg);
+    border-radius: var(--radius-md);
+}
+
+.guide-icon {
+    font-size: 2.5em;
+    flex-shrink: 0;
+}
+
+.guide-content h5 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.did-you-know {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin: var(--spacing-xl) 0;
+}
+
+.did-you-know h4 {
+    color: #856404;
+    margin-bottom: var(--spacing-md);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.feature-card {
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    border-left: 4px solid;
+}
+
+.feature-card.planet-feature {
+    background: #d4edda;
+    border-color: #28a745;
+}
+
+.feature-card.noise-feature {
+    background: #f8d7da;
+    border-color: #dc3545;
+}
+
+.feature-card h4 {
+    margin-bottom: var(--spacing-md);
+}
+
+.feature-card ul {
+    margin: var(--spacing-md) 0;
+}
+
+.feature-card li {
+    margin: var(--spacing-sm) 0;
+}
+
+.example-note {
+    background: rgba(255, 255, 255, 0.7);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-md);
+    font-style: italic;
+}
+
+.measurement-guide {
+    background: var(--secondary-bg);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    margin: var(--spacing-xl) 0;
+}
+
+.measurement-guide h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+.measurement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.measurement-item {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+}
+
+.measurement-item h5 {
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.measurement-example {
+    background: var(--secondary-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-md);
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+.science-section {
+    margin: var(--spacing-lg) 0;
+}
+
+.science-intro {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin: var(--spacing-lg) 0;
+}
+
+.science-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin: var(--spacing-xl) 0;
+}
+
+.science-step {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+    padding: var(--spacing-lg);
+    background: var(--secondary-bg);
+    border-radius: var(--radius-md);
+}
+
+.step-num {
+    background: var(--accent-primary);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+.step-content h5 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.science-facts {
+    margin: var(--spacing-xl) 0;
+}
+
+.science-facts h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+.fact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.fact-card {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.fact-icon {
+    font-size: 2.5em;
+    margin-bottom: var(--spacing-md);
+}
+
+.fact-card h5 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.ai-section {
+    margin: var(--spacing-lg) 0;
+}
+
+.ai-intro {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin: var(--spacing-lg) 0;
+}
+
+.ai-advantages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+}
+
+.advantage-card {
+    background: white;
+    border: 2px solid var(--border-light);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.advantage-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.advantage-icon {
+    font-size: 3em;
+    margin-bottom: var(--spacing-md);
+}
+
+.advantage-card h5 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.advantage-card .detail {
+    color: var(--secondary-text);
+    font-size: 0.9em;
+    margin-top: var(--spacing-sm);
+}
+
+.ai-models-info {
+    margin: var(--spacing-xl) 0;
+}
+
+.ai-models-info h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.model-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.model-info-card {
+    background: var(--secondary-bg);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--accent-primary);
+}
+
+.model-info-card h5 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-sm);
+}
+
+.model-specs {
+    display: flex;
+    justify-content: space-around;
+    margin: var(--spacing-md) 0;
+    font-weight: 600;
+    color: var(--accent-primary);
+}
+
+.model-desc {
+    color: var(--secondary-text);
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.try-models {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+}
+
+.try-models h4 {
+    color: white;
+    margin-bottom: var(--spacing-md);
+}
+
+.try-models .btn-primary {
+    background: white;
+    color: var(--accent-primary);
+    margin-top: var(--spacing-md);
+}
+
+.try-models .btn-primary:hover {
+    background: var(--secondary-bg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .results-grid,
+    .features-grid,
+    .measurement-grid,
+    .fact-grid,
+    .ai-advantages,
+    .model-comparison {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-tabs {
+        flex-direction: column;
+    }
+    
+    .info-tab-btn {
+        width: 100%;
+    }
+    
+    .guide-item,
+    .science-step {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* ========================================
+   Research Mode Model Comparison Enhancements
+   ======================================== */
+
+.sample-selection-section {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-left: 4px solid var(--accent-primary);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.sample-selection-section h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.sample-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    flex-wrap: wrap;
+}
+
+.btn-sample {
+    background: white;
+    border: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1em;
+}
+
+.btn-sample:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.sample-hint {
+    color: var(--secondary-text);
+    font-style: italic;
+    margin-top: var(--spacing-md);
+}
+
+.model-selection-section {
+    margin: var(--spacing-xl) 0;
+}
+
+.model-selection-section h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+.comparison-results-header {
+    background: linear-gradient(135deg, var(--nasa-blue) 0%, var(--accent-primary) 100%);
+    color: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.comparison-results-header h3 {
+    margin: 0 0 var(--spacing-sm) 0;
+    color: white;
+}
+
+.comparison-results-header p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+.sample-info {
+    background: var(--secondary-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.sample-info h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.sample-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.sample-stats span {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-sm);
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-lg) 0;
+    background: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.comparison-table th {
+    background: var(--secondary-bg);
+    font-weight: 600;
+    color: var(--nasa-blue);
+}
+
+.comparison-table tr:hover {
+    background: var(--secondary-bg);
+}
+
+.correct-prediction {
+    background: #d4edda !important;
+}
+
+.incorrect-prediction {
+    background: #f8d7da !important;
+}
+
+.comparison-summary {
+    background: var(--secondary-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin: var(--spacing-lg) 0;
+}
+
+.comparison-summary h4 {
+    color: var(--nasa-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.comparison-summary p {
+    margin: var(--spacing-sm) 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sample-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-sample {
+        width: 100%;
+    }
+    
+    .sample-stats {
+        flex-direction: column;
+    }
+    
+    .comparison-table {
+        font-size: 0.9em;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: var(--spacing-sm);
+    }
+}

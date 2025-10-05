@@ -1,0 +1,385 @@
+# Production Kubernetes deployment for Exoplanet Detection Pipeline
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: exoplanet-prod
+  labels:
+    name: exoplanet-prod
+    environment: production
+
+---
+# ConfigMap for application configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: exoplanet-config
+  namespace: exoplanet-prod
+data:
+  LOG_LEVEL: "INFO"
+  WORKERS: "4"
+  PORT: "8000"
+  ENVIRONMENT: "production"
+  REDIS_URL: "redis://redis-service:6379"
+  DATABASE_URL: "postgresql://postgres:password@postgres-service:5432/exoplanet"
+  MODEL_CACHE_SIZE: "1000"
+  BATCH_SIZE: "32"
+  MAX_CONCURRENT_REQUESTS: "100"
+
+---
+# Secret for sensitive configuration
+apiVersion: v1
+kind: Secret
+metadata:
+  name: exoplanet-secrets
+  namespace: exoplanet-prod
+type: Opaque
+data:
+  SECRET_KEY: <base64-encoded-secret-key>
+  DATABASE_PASSWORD: <base64-encoded-db-password>
+  JWT_SECRET: <base64-encoded-jwt-secret>
+  API_KEY: <base64-encoded-api-key>
+
+---
+# Persistent Volume Claim for model storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-storage
+  namespace: exoplanet-prod
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: fast-ssd
+
+---
+# Deployment for API service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exoplanet-api
+  namespace: exoplanet-prod
+  labels:
+    app: exoplanet-api
+    component: api
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: exoplanet-api
+  template:
+    metadata:
+      labels:
+        app: exoplanet-api
+        component: api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: exoplanet-service-account
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+      - name: api
+        image: your-registry.com/exoplanet-detection-pipeline:IMAGE_TAG_PLACEHOLDER
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: http
+        env:
+        - name: SERVICE_MODE
+          value: "api"
+        envFrom:
+        - configMapRef:
+            name: exoplanet-config
+        - secretRef:
+            name: exoplanet-secrets
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 5
+          failureThreshold: 3
+        volumeMounts:
+        - name: model-storage
+          mountPath: /app/models
+        - name: tmp-storage
+          mountPath: /app/tmp
+      volumes:
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-storage
+      - name: tmp-storage
+        emptyDir:
+          sizeLimit: 1Gi
+
+---
+# Deployment for worker service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exoplanet-worker
+  namespace: exoplanet-prod
+  labels:
+    app: exoplanet-worker
+    component: worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: exoplanet-worker
+  template:
+    metadata:
+      labels:
+        app: exoplanet-worker
+        component: worker
+    spec:
+      serviceAccountName: exoplanet-service-account
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+      - name: worker
+        image: your-registry.com/exoplanet-detection-pipeline:IMAGE_TAG_PLACEHOLDER
+        imagePullPolicy: Always
+        env:
+        - name: SERVICE_MODE
+          value: "worker"
+        envFrom:
+        - configMapRef:
+            name: exoplanet-config
+        - secretRef:
+            name: exoplanet-secrets
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: model-storage
+          mountPath: /app/models
+        - name: data-storage
+          mountPath: /app/data
+      volumes:
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-storage
+      - name: data-storage
+        emptyDir:
+          sizeLimit: 5Gi
+
+---
+# Service for API
+apiVersion: v1
+kind: Service
+metadata:
+  name: exoplanet-api-service
+  namespace: exoplanet-prod
+  labels:
+    app: exoplanet-api
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  selector:
+    app: exoplanet-api
+
+---
+# Horizontal Pod Autoscaler for API
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: exoplanet-api-hpa
+  namespace: exoplanet-prod
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: exoplanet-api
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+
+---
+# Ingress for external access
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: exoplanet-ingress
+  namespace: exoplanet-prod
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+spec:
+  tls:
+  - hosts:
+    - exoplanet-api.yourdomain.com
+    secretName: exoplanet-tls
+  rules:
+  - host: exoplanet-api.yourdomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: exoplanet-api-service
+            port:
+              number: 80
+
+---
+# Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: exoplanet-service-account
+  namespace: exoplanet-prod
+
+---
+# Role for service account
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: exoplanet-role
+  namespace: exoplanet-prod
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "configmaps", "secrets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+
+---
+# Role binding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: exoplanet-role-binding
+  namespace: exoplanet-prod
+subjects:
+- kind: ServiceAccount
+  name: exoplanet-service-account
+  namespace: exoplanet-prod
+roleRef:
+  kind: Role
+  name: exoplanet-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# Network Policy for security
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: exoplanet-network-policy
+  namespace: exoplanet-prod
+spec:
+  podSelector:
+    matchLabels:
+      app: exoplanet-api
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-nginx
+    ports:
+    - protocol: TCP
+      port: 8000
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: kube-system
+  - to: []
+    ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53
+  - to: []
+    ports:
+    - protocol: TCP
+      port: 443
+    - protocol: TCP
+      port: 80
+
+---
+# Pod Disruption Budget
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: exoplanet-api-pdb
+  namespace: exoplanet-prod
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: exoplanet-api

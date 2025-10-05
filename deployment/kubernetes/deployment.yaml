@@ -1,0 +1,173 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exoplanet-api
+  namespace: exoplanet-detection
+  labels:
+    app: exoplanet-api
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: exoplanet-api
+  template:
+    metadata:
+      labels:
+        app: exoplanet-api
+        version: v1
+    spec:
+      containers:
+      - name: api
+        image: exoplanet-detection:latest
+        ports:
+        - containerPort: 8000
+          name: http
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: DB_HOST
+          value: "postgresql-service"
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: exoplanet-secrets
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: exoplanet-secrets
+              key: DB_PASSWORD
+        - name: REDIS_HOST
+          value: "redis-service"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: exoplanet-secrets
+              key: REDIS_PASSWORD
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: exoplanet-secrets
+              key: JWT_SECRET
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+        - name: model-storage
+          mountPath: /app/models
+        - name: logs
+          mountPath: /app/logs
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+      volumes:
+      - name: config-volume
+        configMap:
+          name: exoplanet-config
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-storage-pvc
+      - name: logs
+        emptyDir: {}
+      imagePullSecrets:
+      - name: registry-secret
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exoplanet-worker
+  namespace: exoplanet-detection
+  labels:
+    app: exoplanet-worker
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: exoplanet-worker
+  template:
+    metadata:
+      labels:
+        app: exoplanet-worker
+        version: v1
+    spec:
+      containers:
+      - name: worker
+        image: exoplanet-detection:latest
+        command: ["python", "-m", "src.api.worker"]
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: WORKER_TYPE
+          value: "processing"
+        - name: DB_HOST
+          value: "postgresql-service"
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: exoplanet-secrets
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: exoplanet-secrets
+              key: DB_PASSWORD
+        - name: REDIS_HOST
+          value: "redis-service"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: exoplanet-secrets
+              key: REDIS_PASSWORD
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+        - name: model-storage
+          mountPath: /app/models
+        - name: temp-storage
+          mountPath: /tmp
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import redis; r = redis.Redis(host='redis-service'); r.ping()"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+      volumes:
+      - name: config-volume
+        configMap:
+          name: exoplanet-config
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-storage-pvc
+      - name: temp-storage
+        emptyDir:
+          sizeLimit: 10Gi
