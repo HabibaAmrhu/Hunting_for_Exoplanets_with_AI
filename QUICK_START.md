@@ -1,6 +1,6 @@
 # 🚀 Quick Start Guide
 
-**👥 Team**: Habiba Amr & Aisha Samir | **🏆 NASA Space Apps Challenge 2025**
+**👥 Team**: Exovision AI (Habiba Amr & Aisha Samir) | **🏆 NASA Space Apps Challenge 2025**
 
 ## 🌐 Primary Interface: Frontend_V0
 
@@ -268,7 +268,7 @@ npx http-server -p 8000
 
 ## 🎉 Enjoy!
 
-Your NASA Exoplanet Detection Pipeline is ready to use with:
+Your Exovision AI NASA Exoplanet Detection Pipeline is ready to use with:
 - ✅ **Fully integrated Model Comparison**
 - ✅ **Export functionality in multiple formats**
 - ✅ **Interactive visualizations throughout**

@@ -1,12 +1,12 @@
 # Project Management Documentation
 
-## NASA Exoplanet Detection Pipeline - Project Management Suite
+## Exovision AI - NASA Exoplanet Detection Pipeline - Project Management Suite
 
 **Project Duration**: October 4, 2024 - October 5, 2025  
-**Team**: Habiba Amr & Aisha Samir  
+**Team**: Exovision AI (Habiba Amr & Aisha Samir)  
 **Competition**: NASA Space Apps Challenge 2025  
 
-This directory contains comprehensive project management documentation for the world-record achieving NASA Exoplanet Detection Pipeline project.
+This directory contains comprehensive project management documentation for the world-record achieving Exovision AI NASA Exoplanet Detection Pipeline project.
 
 ## Directory Structure
 

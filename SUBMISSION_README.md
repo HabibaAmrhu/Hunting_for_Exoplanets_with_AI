@@ -1,16 +1,16 @@
 # 🚀 NASA Space Apps Challenge 2025 - Final Submission
 
-## 🌌 NASA Exoplanet Detection Pipeline
+## 🌌 Exovision AI - NASA Exoplanet Detection Pipeline
 
 **Project Completion**: October 4-5, 2025  
-**Team**: Habiba Amr & Aisha Samir  
+**Team**: Exovision AI (Habiba Amr & Aisha Samir)  
 **Challenge**: NASA Space Apps Challenge 2025  
 
 ---
 
 ## 📦 Submission Package Contents
 
-This **FinalFinal** folder contains the complete, production-ready NASA Exoplanet Detection Pipeline for final submission.
+This **FinalFinal** folder contains the complete, production-ready Exovision AI NASA Exoplanet Detection Pipeline for final submission.
 
 ### 📁 **Directory Structure**
 
@@ -192,7 +192,7 @@ python run_tests.py
 
 ## 🎊 **Final Notes**
 
-This NASA Exoplanet Detection Pipeline represents a complete, production-ready AI system for discovering new worlds. Built in just 36 hours for the NASA Space Apps Challenge 2025, it demonstrates how cutting-edge machine learning can accelerate scientific discovery while remaining accessible to students, educators, and researchers worldwide.
+This Exovision AI NASA Exoplanet Detection Pipeline represents a complete, production-ready AI system for discovering new worlds. Built in just 36 hours for the NASA Space Apps Challenge 2025, it demonstrates how cutting-edge machine learning can accelerate scientific discovery while remaining accessible to students, educators, and researchers worldwide.
 
 **The system is ready for:**
 - ✅ **Immediate deployment** in research environments

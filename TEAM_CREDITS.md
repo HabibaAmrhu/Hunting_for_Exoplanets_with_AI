@@ -1,6 +1,6 @@
 # 👥 Team Credits - NASA Space Apps Challenge 2025
 
-## 🌌 NASA Exoplanet Detection Pipeline
+## 🌌 Exovision AI - NASA Exoplanet Detection Pipeline
 
 **Project Timeline**: October 4-5, 2025  
 **Competition**: NASA Space Apps Challenge 2025  
@@ -157,7 +157,7 @@
 ### **Team Contact**
 - **Habiba Amr**: AI/ML Development
 - **Aisha Samir**: Frontend Development
-- **Project**: NASA Exoplanet Detection Pipeline
+- **Project**: Exovision AI - NASA Exoplanet Detection Pipeline
 - **Competition**: NASA Space Apps Challenge 2025
 
 ---

@@ -1,4 +1,4 @@
-# � NASAl Exoplanet Detection Pipeline
+# 🌌 Exovision AI - NASA Exoplanet Detection Pipeline
 
 *World-class AI system for discovering planets beyond our solar system*
 
@@ -13,7 +13,7 @@
 A state-of-the-art machine learning pipeline that detects exoplanets in stellar light curves from space telescopes like Kepler and TESS. This system combines multiple AI architectures to achieve superior accuracy in finding new worlds.
 
 **🗓️ Project Timeline**: October 4-5, 2025 | **🚀 NASA Space Apps Challenge 2025**  
-**👥 Team**: Habiba Amr & Aisha Samir
+**👥 Team**: Exovision AI (Habiba Amr & Aisha Samir)
 
 ## 🚀 What This Does
 
