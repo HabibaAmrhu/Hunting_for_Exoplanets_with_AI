@@ -192,7 +192,7 @@ python run_tests.py
 
 ## 🎊 **Final Notes**
 
-This NASA Exoplanet Detection Pipeline represents a complete, production-ready AI system for discovering new worlds. Built in just 2 days for the NASA Space Apps Challenge 2025, it demonstrates how cutting-edge machine learning can accelerate scientific discovery while remaining accessible to students, educators, and researchers worldwide.
+This NASA Exoplanet Detection Pipeline represents a complete, production-ready AI system for discovering new worlds. Built in just 36 hours for the NASA Space Apps Challenge 2025, it demonstrates how cutting-edge machine learning can accelerate scientific discovery while remaining accessible to students, educators, and researchers worldwide.
 
 **The system is ready for:**
 - ✅ **Immediate deployment** in research environments
