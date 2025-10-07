@@ -150,7 +150,7 @@
 ## 📞 Contact Information
 
 ### **Project Repository**
-- **GitHub**: [To be added when uploaded]
+- **GitHub**: [https://github.com/HabibaAmrhu/Hunting_for_Exoplanets_with_AI.git]
 - **Documentation**: See `docs/` folder
 - **Live Demo**: Frontend_V0/index.html
 
